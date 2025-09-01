@@ -1,4 +1,4 @@
-## 🔹 Condiciones para la creación de ramas
+# 🔹 Condiciones para la creación de ramas
 
 La creación de una rama de trabajo debe realizarse únicamente cuando exista una tarea o issue asignado a un desarrollador. Esto significa que no se deben crear ramas de manera anticipada o sin un propósito definido, ya que cada rama representa un esfuerzo de desarrollo vinculado a una necesidad concreta del proyecto. Cada rama debe estar asociada a un issue/tarea único, lo cual permite:
 
@@ -10,9 +10,7 @@ La creación de una rama de trabajo debe realizarse únicamente cuando exista un
 
 En resumen, una rama equivale a una tarea viva en desarrollo. Cuando la tarea se completa, la rama debe integrarse al flujo principal (`develop`, `main`, según corresponda) y posteriormente eliminarse, cerrando así el ciclo de vida de la rama junto con el issue que le dio origen.
 
----
-
-## 🔹 Creación de ramas de trabajo: Métodos recomendados
+# 🔹 Creación de ramas de trabajo: Métodos recomendados
 
 En un flujo de trabajo basado en ramas (`develop`, `feat/*`, `hotfix/*`, etc.), la creación de ramas correctas es un paso crítico para mantener la estabilidad del código y evitar conflictos innecesarios. Cada nueva rama representa un espacio aislado donde un desarrollador puede trabajar en una tarea, corrección o funcionalidad sin afectar directamente la rama principal o la de desarrollo.
 
@@ -26,17 +24,15 @@ A continuación, se documentan dos enfoques válidos para crear ramas de trabajo
 > [!NOTE]
 > Ambos enfoques son correctos y pueden convivir, pero es importante que el equipo elija cuál será la práctica recomendada para asegurar consistencia y reducir errores.
 
----
-
-## 🔹 Enfoque 1: Método clásico
+# 🔹 Enfoque 1: Método clásico
 
 - **Paso 1:** Posicionarse en la rama `develop`.
-
+    
     ```bash
     git checkout develop
     ```
 
-    👉 **Propósito:** Asegurarse de estar en la rama base desde donde deben partir todas las ramas de desarrollo.
+    👉 **Propósito:** Asegurarse de estar en la rama base desde donde deben partir todas las ramas de desarrollo.<br>
     ⚠️ **Problema que evita:** Crear la rama accidentalmente desde main u otra rama equivocada o desactualizada.
 
 - **Paso 2:** Actualizar la rama `develop` de tu repositoroio local.
@@ -45,7 +41,7 @@ A continuación, se documentan dos enfoques válidos para crear ramas de trabajo
     git pull origin develop
     ```
 
-    👉 **Propósito:** Traer los últimos cambios de la rama remota.
+    👉 **Propósito:** Traer los últimos cambios de la rama remota.<br>
     ⚠️ **Problema que evita:** Empezar la nueva rama con una base desactualizada, lo que generaría conflictos al hacer merge después.
 
 - **Paso 3:** Crear la nueva rama.
@@ -54,11 +50,11 @@ A continuación, se documentan dos enfoques válidos para crear ramas de trabajo
     git checkout -b <nombre de la rama nueva>
     ```
 
-    👉 **Propósito:** Crear una nueva rama local, basada en la rama actual (`develop`).
+    👉 **Propósito:** Crear una nueva rama local, basada en la rama actual (`develop`).<br>
     ⚠️ **Problema que evita:** Tener ramas que no siguen la convención de nombres o que parten de la rama incorrecta.
 
-    > [!NOTE]
-    > El nombre de las ramas deben seguir el estandar [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+> [!NOTE]
+> El nombre de las ramas deben seguir el estandar [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
 - **Paso 4:** Publicar la rama en remoto.
 
@@ -66,7 +62,7 @@ A continuación, se documentan dos enfoques válidos para crear ramas de trabajo
     git push -u origin <nombre de la rama nueva>
     ```
 
-    👉 **Propósito:** Subir la rama al repositorio remoto y establecer el “tracking” con la rama remota correspondiente.
+    👉 **Propósito:** Subir la rama al repositorio remoto y establecer el “tracking” con la rama remota correspondiente.<br>
     ⚠️ **Problema que evita:** Ramas que solo existen en local, invisibles para el resto del equipo.
 
 ✅ **Ventajas de este método:**
@@ -78,9 +74,7 @@ A continuación, se documentan dos enfoques válidos para crear ramas de trabajo
 
 - Si el desarrollador olvida hacer git pull antes de crear la rama, puede partir de un develop local desactualizado.
 
----
-
-## 🔹 Enfoque 2: Método seguro
+# 🔹 Enfoque 2: Método seguro
 
 - **Paso 1:** Actualizar referencias remotas.
 
@@ -88,7 +82,7 @@ A continuación, se documentan dos enfoques válidos para crear ramas de trabajo
     git fetch --all
     ```
 
-    👉 **Propósito:** Sincronizar todas las referencias remotas en tu repositorio local.
+    👉 **Propósito:** Sincronizar todas las referencias remotas en tu repositorio local.<br>
     ⚠️ **Problema que evita:** Crear una rama desde una referencia de develop obsoleta que no incluya los últimos cambios del equipo.
 
 - **Paso 2:** Sin importar en qué rama estés, crear la nueva rama desde `origin/develop`.
@@ -97,11 +91,11 @@ A continuación, se documentan dos enfoques válidos para crear ramas de trabajo
     git checkout -b <nombre de la rama nueva> origin/develop
     ```
 
-    👉 **Propósito:** Esto garantiza que la nueva rama contiene exactamente lo último que hay en develop remoto, aunque tu develop local esté desactualizado.
+    👉 **Propósito:** Esto garantiza que la nueva rama contiene exactamente lo último que hay en develop remoto, aunque tu develop local esté desactualizado.<br>
     ⚠️ **Problema que evita:** Reduce los riesgos de arrastrar commits faltantes.
 
-    > [!NOTE]
-    > El nombre de las ramas deben seguir el estandar [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+> [!NOTE]
+> El nombre de las ramas deben seguir el estandar [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
 - **Paso 3:** Publicar la rama en remoto.
 
@@ -109,7 +103,7 @@ A continuación, se documentan dos enfoques válidos para crear ramas de trabajo
     git push -u origin <nombre de la rama nueva>
     ```
 
-    👉 **Propósito:** Puede ejecutarse desde cualquier rama en la que estés.
+    👉 **Propósito:** Puede ejecutarse desde cualquier rama en la que estés.<br>
     ⚠️ **Problema que evita:** Reduce los riesgos de arrastrar commits faltantes.
 
 ✅ **Ventajas de este método:**
