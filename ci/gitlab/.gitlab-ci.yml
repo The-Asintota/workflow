@@ -1,0 +1,31 @@
+stages:
+  - release
+
+publish_release:
+  stage: release
+  image: node:20
+  variables:
+    # It is crucial for semantic-release to correctly analyze changes.
+    GIT_STRATEGY: fetch
+    # Turn off to get full history.
+    GIT_DEPTH: 0
+  before_script:
+    # Install semantic-release and the necessary plugins without saving them to a package.json.
+    # These plugins allow you to analyze commits, generate release notes, update the changelog,
+    # create Git tags, and publish the release to GitLab.
+    - npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/gitlab @semantic-release/gitlab conventional-changelog-conventionalcommits
+  script:
+    # The following commented line is used to test the process without creating an actual release.
+    # - npx semantic-release --dry-run
+    # Run semantic-release to automate the release process.
+    - npx semantic-release
+  rules:
+    # This job will only run if all of these conditions are met:
+    # 1. The commit is on the 'main' branch.
+    # 2. The action that triggered the pipeline is a 'push'.
+    # 3. The 'main' branch is protected in GitLab.
+    - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_PROTECTED == "true"
+      # If the above conditions are met, the job runs.
+      when: on_success
+    # If the conditions are not met, the job never runs.
+    - when: never
