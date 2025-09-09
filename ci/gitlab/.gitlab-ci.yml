@@ -9,9 +9,9 @@ deploy_development_env:
   # ...
   rules:
     # This job will only run if all of these conditions are met:
-    # 1. The commit is on the 'main' branch.
+    # 1. The commit is on the 'develop' branch.
     # 2. The action that triggered the pipeline is a 'push'.
-    # 3. The 'main' branch is protected in GitLab.
+    # 3. The 'develop' branch is protected in GitLab.
     - if: $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_PROTECTED == "true"
       # If the above conditions are met, the job runs.
       when: on_success
