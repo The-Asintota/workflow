@@ -1,11 +1,11 @@
-# Integración continua y liberaciones automáticas
+# 🔹 Integración continua y liberaciones automáticas
 Esta sección contiene una configuración inicial usada y probada por mi para desplegar entornos y automatizar `releases` con [GitLab CI](https://docs.gitlab.com/ci/) y [semantic-release](https://semantic-release.gitbook.io/semantic-release/usage/getting-started). Puedes agregar estos archivos en la **raíz** de tu proyecto en GitLab para que la plataforma los detecte automáticamente y así aprovechar toda la configuración que se describe en esta documentación. Los archivos clave que se explican a continuación son:
 
 - `.gitlab-ci.yml`: Configuración de la pipeline en GitLab.
 - `CHANGELOG.md`: Registro de cambios (vacío inicialmente, lo actualiza `semantic-release`).
 - `release.config.js`: Configuración de `semantic-release`.
 
-## Propósito de cada archivo
+# 🔹 Propósito de cada archivo
 ### `.gitlab-ci.yml`
 Define la pipeline de CI/CD con dos etapas principales:
 
@@ -36,12 +36,12 @@ Define la pipeline de CI/CD con dos etapas principales:
     - `@semantic-release/git`: Commitea `CHANGELOG.md` (mensaje: `'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'`). El `[skip ci]` evita loops de pipeline por el commit que `semantic-release` crea.
     - `@semantic-release/gitlab`: Publica la `release` en GitLab.
 
-## Prerrequisitos y configuración en GitLab
+# 🔹 Prerrequisitos y configuración en GitLab
 - Crea una variable de entorno protegida en CI llamada `GITLAB_TOKEN` o `CI_JOB_TOKEN` con las siguientes opciones habilitadas `Masked`, `Protect variable` y `Expand variable reference`, esta variable tendra como valor un token de acceso con los permisos `api`, `read_repository`, `write_repository`. `@semantic-release/gitlab` necesita credenciales para publicar la release y `@semantic-release/git` para empujar cambios. Para crear y configurar el token de accesso puede consultar la siguiente documentación [aquí](https://docs.gitlab.com/user/project/settings/project_access_tokens/) y para crear y configurar la variable de entorno puede consultar la siguiente documentación [aquí](https://docs.gitlab.com/ci/variables/).
 - Cualquier rama que tenga como objetivo realizar una `MR` hacia la rama `main` debe ser una rama protegida. En algunos casos no conviene proteger la rama para trabajar mejor con ella. Considere proteger la rama en el momento en que se vaya a revisar o aceptar la `MR` y mantenerla desprotegido mientras se trabaja en ella.
 - Mantener `repositoryUrl` actualizado en `release.config.js`.
 
-## Flujo general 
+# 🔹 Flujo general 
 ### ¿Qué pasa cuando haces `push` a `main`?
 Publicar después de que una `MR` se ha fusionado en `main` es ideal porque ese momento indica que los cambios han sido revisados, testeados y aprobados. La `MR` es el punto de control humano + CI que valida la calidad del cambio, por eso `semantic-release` se ejecuta en el pipeline que se dispara tras el `push` resultante de la fusión a `main` y justo despues de realizar un despliegue a `producción`. Una vez aprobada la `MR`:
 
