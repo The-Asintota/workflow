@@ -1,5 +1,38 @@
 stages:
+  - deploy
   - release
+
+deploy_development_env:
+  stage: deploy
+  image: alpine:latest
+  # Add the commands you require for deployment
+  # ...
+  rules:
+    # This job will only run if all of these conditions are met:
+    # 1. The commit is on the 'main' branch.
+    # 2. The action that triggered the pipeline is a 'push'.
+    # 3. The 'main' branch is protected in GitLab.
+    - if: $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_PROTECTED == "true"
+      # If the above conditions are met, the job runs.
+      when: on_success
+    # If the conditions are not met, the job never runs.
+    - when: never
+
+deploy_production_env:
+  stage: deploy
+  image: alpine:latest
+  # Add the commands you require for deployment
+  # ...
+  rules:
+    # This job will only run if all of these conditions are met:
+    # 1. The commit is on the 'main' branch.
+    # 2. The action that triggered the pipeline is a 'push'.
+    # 3. The 'main' branch is protected in GitLab.
+    - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_PROTECTED == "true"
+      # If the above conditions are met, the job runs.
+      when: on_success
+    # If the conditions are not met, the job never runs.
+    - when: never
 
 publish_release:
   stage: release
