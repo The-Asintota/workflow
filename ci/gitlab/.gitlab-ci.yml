@@ -1,6 +1,48 @@
+image: # Indicates the image you need for your project, based on the language you are using.
+
 stages:
+  - tests
   - deploy
   - release
+
+variables:
+  # Base folder of cached dependencies for different managers
+  DEPS_CACHE: "$CI_PROJECT_DIR/.cache/deps"
+  # Specific subfolder where we save the Python wheels
+  PIP_WHEELHOUSE: "$DEPS_CACHE/pip/wheelhouse"
+
+default:
+  cache:
+    # A single global cache is defined based on the Python dependency file.
+    # The key is regenerated only if "files" changes, which avoids invalidating the cache unnecessarily.
+    - key:
+        files: ["requirements.txt", "poetry.lock"]
+      paths: [ $DEPS_CACHE/pip ]
+      policy: pull-push   # Retrieves cache at startup and updates it at startup.
+
+tests:
+  stage: tests
+  before_script:
+    # Prepare your project for test execution (install dependencies, configurations, etc).
+    # ...
+  script:
+    # Add the commands you need for test execution
+    # ...
+  rules:
+    # This job will only run if all of these conditions are met:
+    # 1. The action that triggered the pipeline is a 'push'.
+    # 2. The action that triggered the pipeline is a 'merge request'.
+    # 2. Only when the commit branch is NOT 'main'.
+    # 3. When this commit has a valid previous commit, a SHA of zeros indicates that no previous commit existed, indicating that 
+    # a branch has been created and does not yet contain any changes. With this condition we avoid executing the job in those initial situations.
+    - if: $CI_COMMIT_BRANCH != "main" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BEFORE_SHA != "0000000000000000000000000000000000000000"
+      # Indicates that the flow always runs, regardless of whether flows in previous stages failed.
+      when: always
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      # Indicates that the flow always runs, regardless of whether flows in previous stages failed.
+      when: always
+    # If the conditions are not met, the job never runs.
+    - when: never
 
 deploy_development_env:
   stage: deploy
@@ -13,7 +55,7 @@ deploy_development_env:
     # 2. The action that triggered the pipeline is a 'push'.
     # 3. The 'develop' branch is protected in GitLab.
     - if: $CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_PROTECTED == "true"
-      # If the above conditions are met, the job runs.
+      # Indicates that the flow will only be executed if all flows from previous stages have completed successfully.
       when: on_success
     # If the conditions are not met, the job never runs.
     - when: never
@@ -29,7 +71,7 @@ deploy_production_env:
     # 2. The action that triggered the pipeline is a 'push'.
     # 3. The 'main' branch is protected in GitLab.
     - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_PROTECTED == "true"
-      # If the above conditions are met, the job runs.
+      # Indicates that the flow will only be executed if all flows from previous stages have completed successfully.
       when: on_success
     # If the conditions are not met, the job never runs.
     - when: never
@@ -58,7 +100,7 @@ publish_release:
     # 2. The action that triggered the pipeline is a 'push'.
     # 3. The 'main' branch is protected in GitLab.
     - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_PROTECTED == "true"
-      # If the above conditions are met, the job runs.
+      # Indicates that the flow will only be executed if all flows from previous stages have completed successfully.
       when: on_success
     # If the conditions are not met, the job never runs.
     - when: never
