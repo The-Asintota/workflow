@@ -6,9 +6,9 @@ stages:
   - release
 
 variables:
-  # Base folder of cached dependencies for different managers
+  # Base folder of cached dependencies for different managers.
   DEPS_CACHE: "$CI_PROJECT_DIR/.cache/deps"
-  # Specific subfolder where we save the Python wheels
+  # Specific subfolder where we save the Python wheels.
   PIP_WHEELHOUSE: "$DEPS_CACHE/pip/wheelhouse"
 
 default:
@@ -26,7 +26,7 @@ tests:
     # Prepare your project for test execution (install dependencies, configurations, etc).
     # ...
   script:
-    # Add the commands you need for test execution
+    # Add the commands you need for test execution.
     # ...
   rules:
     # This job will only run if all of these conditions are met:
@@ -47,8 +47,12 @@ tests:
 deploy_development_env:
   stage: deploy
   image: alpine:latest
-  # Add the commands you require for deployment
-  # ...
+  before_script:
+    # Prepare the environment to begin the deployment process (install and configure CI tools for deployment based on the service you use).
+    # ...
+  script:
+    # Add the commands you need to start the deployment.
+    # ...
   rules:
     # This job will only run if all of these conditions are met:
     # 1. The commit is on the 'develop' branch.
@@ -63,8 +67,12 @@ deploy_development_env:
 deploy_production_env:
   stage: deploy
   image: alpine:latest
-  # Add the commands you require for deployment
-  # ...
+  before_script:
+    # Prepare the environment to begin the deployment process (install and configure CI tools for deployment based on the service you use).
+    # ...
+  script:
+    # Add the commands you need to start the deployment.
+    # ...
   rules:
     # This job will only run if all of these conditions are met:
     # 1. The commit is on the 'main' branch.
