@@ -35,7 +35,7 @@ tests:
     # 2. Only when the commit branch is NOT 'main'.
     # 3. When this commit has a valid previous commit, a SHA of zeros indicates that no previous commit existed, indicating that 
     # a branch has been created and does not yet contain any changes. With this condition we avoid executing the job in those initial situations.
-    - if: $CI_COMMIT_BRANCH != "main" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BEFORE_SHA != "0000000000000000000000000000000000000000"
+    - if: $CI_COMMIT_BRANCH != "main" && $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BEFORE_SHA != "0000000000000000000000000000000000000000"
       # Indicates that the flow always runs, regardless of whether flows in previous stages failed.
       when: always
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
