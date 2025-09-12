@@ -1,4 +1,4 @@
-# 🔹 Condiciones para la creación de ramas
+# 🔹 1. Condiciones para la creación de ramas
 
 La creación de una rama de trabajo debe realizarse únicamente cuando exista una tarea o issue asignado a un desarrollador. Esto significa que no se deben crear ramas de manera anticipada o sin un propósito definido, ya que cada rama representa un esfuerzo de desarrollo vinculado a una necesidad concreta del proyecto. Cada rama debe estar asociada a un issue/tarea único, lo cual permite:
 
@@ -10,7 +10,7 @@ La creación de una rama de trabajo debe realizarse únicamente cuando exista un
 
 En resumen, una rama equivale a una tarea viva en desarrollo. Cuando la tarea se completa, la rama debe integrarse al flujo principal (`develop`, `main`, según corresponda) y posteriormente eliminarse, cerrando así el ciclo de vida de la rama junto con el issue que le dio origen.
 
-# 🔹 Creación de ramas de trabajo: Métodos recomendados
+# 🔹 2. Creación de ramas de trabajo: Métodos recomendados
 
 En un flujo de trabajo basado en ramas (`develop`, `feat/*`, `hotfix/*`, etc.), la creación de ramas correctas es un paso crítico para mantener la estabilidad del código y evitar conflictos innecesarios. Cada nueva rama representa un espacio aislado donde un desarrollador puede trabajar en una tarea, corrección o funcionalidad sin afectar directamente la rama principal o la de desarrollo.
 
