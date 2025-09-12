@@ -44,6 +44,9 @@ Define la `pipeline` de CI/CD con tres etapas principales:
 - Cualquier rama que tenga como objetivo realizar una `MR` hacia la rama `main` debe ser una rama protegida. En algunos casos no conviene proteger la rama para trabajar mejor con ella. Considere proteger la rama en el momento en que se vaya a revisar o aceptar la `MR` y mantenerla desprotegido mientras se trabaja en ella.
 
 ## 🔹 3.1. Rellenar secciónes
+> [!NOTE]
+> Este paso es importante porque estas modificaciones determinaran la versión final del archivo `.gitlab-ci.yml` que usaras en tu proyecto, así que presta mucha atención a la siguiente información.
+
 **Modificaciones obligatorias**
 - Mantener `repositoryUrl` actualizado en `release.config.js`.
 - En el archivo `.gitlab-ci.yml` debes indicar la `image` global que se usará para ejecutar el `pipeline`. Esta `image` debe ser la apropiada para el stack de tu proyecto (Python, Javascript, Java, etc).
