@@ -54,13 +54,13 @@ Define la `pipeline` de CI/CD con tres etapas principales:
 **Modificaciones para proyectos Python**
 - En el archivo `.gitlab-ci.yml` agrega al inicio la siguiente imagen recomendada.
 
-  ```txt
+  ```yml
   image: python:3.12-slim-bookworm
   ```
 
 - En el archivo `.gitlab-ci.yml` agrega la etapa `tests` en la sección de `stages` justo antes de la etapa `deploy` si tu proyecto posee pruebas.
 
-  ```txt
+  ```yml
   stages:
     # ...
     - test
@@ -71,7 +71,7 @@ Define la `pipeline` de CI/CD con tres etapas principales:
 - Si en tu proyecto usas `requirements.txt` para gestionar las dependencias y posee pruebas, realiza las siguientes modificaciones en el archivo `.gitlab-ci.yml`:
   - Agrega las secciones `variables` y `default` justo despues de la sección `stages`. De esta manera se declara primero dos variables de entorno usadas por los flujos. `DEPS_CACHE` apunta a una carpeta raíz dentro del workspace del runner (`$CI_PROJECT_DIR/.cache/deps`) donde se agrupan caches para distintos gestores, y `PIP_WHEELHOUSE` es su subdirectorio específico para almacenar las ruedas Python que se generan o se consumen. A continuación se configura un cache global que guarda o recupera el contenido bajo `$DEPS_CACHE/pip` y cuya `key` se reconstruye a partir del contenido de `requirements.txt`, esto significa que GitLab solo invalidará y regenerará esa caché cuando cambie realmente el fichero de dependencias, evitando invalidaciones innecesarias; la `policy: pull-push` indica que el runner intentará recuperar la caché al inicio del flujo y la actualizará al final, de modo que las nuevas ruedas generadas queden disponibles para pipelines posteriores.
 
-    ```text
+    ```yml
     variables:
       # Base folder of cached dependencies for different managers.
       DEPS_CACHE: "$CI_PROJECT_DIR/.cache/deps"
@@ -90,7 +90,7 @@ Define la `pipeline` de CI/CD con tres etapas principales:
 
   - Agrega la etapa `tests` e indica los comandos de tu proyecto que ejecutan sus pruebas, de esta manera se instalaran las dependencias utilizando el sistema de caché que ayuda a mejorar los tiempos de ejecución del `pipeline` y se ejecutaran todas sus pruebas.
 
-    ```text
+    ```yml
     tests:
       stage: tests
       before_script:
@@ -129,7 +129,7 @@ Define la `pipeline` de CI/CD con tres etapas principales:
 
   - Agrega las secciones `variables` y `default` justo despues de la sección `stages`. De esta manera se declara primero dos variables de entorno usadas por los flujos. `DEPS_CACHE` apunta a una carpeta raíz dentro del workspace del runner (`$CI_PROJECT_DIR/.cache/deps`) donde se agrupan caches para distintos gestores, y `PIP_WHEELHOUSE` es su subdirectorio específico para almacenar las ruedas Python que se generan o se consumen. A continuación se configura un cache global que guarda o recupera el contenido bajo `$DEPS_CACHE/pip` y cuya `key` se reconstruye a partir del contenido de `requirements.txt`, esto significa que GitLab solo invalidará y regenerará esa caché cuando cambie realmente el fichero de dependencias, evitando invalidaciones innecesarias; la `policy: pull-push` indica que el runner intentará recuperar la caché al inicio del flujo y la actualizará al final, de modo que las nuevas ruedas generadas queden disponibles para pipelines posteriores.
 
-    ```text
+    ```yml
     variables:
       # Base folder of cached dependencies for different managers.
       DEPS_CACHE: "$CI_PROJECT_DIR/.cache/deps"
@@ -152,7 +152,7 @@ Define la `pipeline` de CI/CD con tres etapas principales:
     ```
   - Agrega la etapa `tests` e indica los comandos de tu proyecto que ejecutan sus pruebas, de esta manera se instalaran las dependencias utilizando el sistema de caché que ayuda a mejorar los tiempos de ejecución del `pipeline` y se ejecutaran todas sus pruebas.
 
-    ```text
+    ```yml
     tests:
       variables:
         # PIPX_HOME / PIPX_BIN_DIR redirects where pipx creates its venvs and binaries.
