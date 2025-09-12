@@ -1,4 +1,4 @@
-# 🔹 Creación de un commit
+# 🔹 1. Creación de un commit
 
 El uso de [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) permite mantener un historial de cambios claro, consistente y fácil de entender en cualquier entorno de trabajo colaborativo. Adoptar esta convención aporta varios beneficios:
 
@@ -24,7 +24,7 @@ En resumen, **Conventional Commits** no solo define un formato de mensajes, sino
 - `<opcional cuerpo>`: Aquí se pueden incluir detalles adicionales: razones del cambio, contexto, diferencias con la versión anterior, etc. Útil cuando la descripción corta no es suficiente.
 - `<opcional notas al pie>`: Espacio reservado para inforación especial como referencias a incidencias o tickets, cambios que rompen compatibilidad (usando [BREAKING CHANGE](#breaking-change) y notas para despliegues o migraciones.
 
-# 🔹 Tipos de commit
+# 🔹 2. Tipos de commit
 
 Los tipos más usados son aquellos que cubren la mayoría de los escenarios en el trabajo colaborativo. Estos ayudan a clasificar los cambios de manera uniforme y permiten que cualquier persona del equipo entienda rápidamente la intención del commit sin tener que revisar el código. Usar estos tipos de forma consistente facilita la lectura del historial, mejora la comunicación y sienta las bases para procesos automatizados como la generación de changelogs o la gestión de versiones.
 
@@ -198,7 +198,7 @@ Los tipos más usados son aquellos que cubren la mayoría de los escenarios en e
   This reverts commit <hash>.
   ```
 
-# 🔹 Scope
+# 🔹 3. Scope
 
 El `scope` es opcional, pero recomendable, sirve para indicar de forma clara qué parte del sistema, módulo o componente se ve afectado por el cambio. Esto resulta especialmente útil en equipos grandes o en proyectos con varias áreas de desarrollo, ya que permite identificar rápidamente la zona impactada sin necesidad de revisar el commit completo. El scope describe el área técnica afectada, no la intención del cambio. Usa un sustantivo corto (módulo, paquete, servicio, carpeta, componente), en kebab-case y preferiblemente uno solo por commit. Si tocas varias áreas, separa en commits.
 
@@ -218,7 +218,7 @@ feat(ui): agregar componente de búsqueda
 fix: corregir error en configuración de build
 ```
 
-# 🔹 Breaking change
+# 🔹 4. Breaking change
 
 Cuando un cambio rompe la compatibilidad o modifica el comportamiento esperado, se debe usar la nota **BREAKING CHANGE**. Esto indica que el cambio realizado no es retrocompatible y que, por lo tanto, quienes usen el sistema, librería o servicio deberán adaptar su código o procesos para evitar errores. Este tipo de nota suele implicar incrementos de versión mayor en el esquema de [versionado semántico (semver)](https://semver.org/lang/es/). Es recomendable acompañar el **BREAKING CHANGE** con una explicación clara de:
 
