@@ -8,7 +8,7 @@ El uso de [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 - 🔍 **Trazabilidad:** resulta más sencillo identificar cuándo y dónde se introdujo una funcionalidad, una mejora de rendimiento o la corrección de un error.
 - 🚀 **Escalabilidad:** cuanto mayor es el número de personas involucradas, más útil resulta contar con un estándar común que evite confusiones y mantenga ordenado el flujo de trabajo.
 
-En resumen, **Conventional Commits** no solo define un formato de mensajes, sino que funciona como una guía de comunicación técnica que facilita el trabajo en equipo en cualquier tipo de proyecto. La estructura de un commit es la siguiente:
+**Conventional Commits** no solo define un formato de mensajes, sino que funciona como una guía de comunicación técnica que facilita el trabajo en equipo en cualquier tipo de proyecto. La estructura de un commit es la siguiente:
 
 ```txt
 <tipo>(<scope>): <descripción corta>
