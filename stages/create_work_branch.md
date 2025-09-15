@@ -8,8 +8,6 @@ La creación de una rama de trabajo debe realizarse únicamente cuando exista un
 - **Garantizar la responsabilidad clara:** al estar asignada la tarea, siempre se sabe quién o quienes son los responsables de la rama y de su evolución.
 - **Mantener el repositorio limpio y organizado:** ramas sin issue asociado tienden a quedar abandonadas y entorpecen la gestión del repositorio.
 
-En resumen, una rama equivale a una tarea viva en desarrollo. Cuando la tarea se completa, la rama debe integrarse al flujo principal (`develop`, `main`, según corresponda) y posteriormente eliminarse, cerrando así el ciclo de vida de la rama junto con el issue que le dio origen.
-
 # 🔹 2. Creación de ramas de trabajo: Métodos recomendados
 
 En un flujo de trabajo basado en ramas (`develop`, `feat/*`, `hotfix/*`, etc.), la creación de ramas correctas es un paso crítico para mantener la estabilidad del código y evitar conflictos innecesarios. Cada nueva rama representa un espacio aislado donde un desarrollador puede trabajar en una tarea, corrección o funcionalidad sin afectar directamente la rama principal o la de desarrollo.
