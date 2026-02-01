@@ -1,114 +1,108 @@
-# 🔹 1. Condiciones para la creación de ramas
+# 🔹 Guía de Creación de Ramas de Trabajo
 
-La creación de una rama de trabajo debe realizarse únicamente cuando exista una tarea o issue asignado a un desarrollador. Esto significa que no se deben crear ramas de manera anticipada o sin un propósito definido, ya que cada rama representa un esfuerzo de desarrollo vinculado a una necesidad concreta del proyecto. Cada rama debe estar asociada a un issue/tarea único, lo cual permite:
+La creación de ramas es un paso crítico para mantener la estabilidad del código y evitar conflictos. Cada rama representa un espacio aislado donde un desarrollador puede trabajar en una tarea sin afectar directamente la rama principal o la de desarrollo.
 
-- **Mantener la trazabilidad:** cualquier cambio en el código se puede rastrear directamente hasta el requerimiento que lo originó.
-- **Facilitar la gestión del proyecto:** en revisiones de código, despliegues o auditorías es más sencillo identificar qué problema o funcionalidad está siendo atendida.
-- **Evitar duplicidad de esfuerzos:** si dos desarrolladores crean ramas para el mismo problema sin coordinación, se generan conflictos innecesarios y retrabajo.
-- **Garantizar la responsabilidad clara:** al estar asignada la tarea, siempre se sabe quién o quienes son los responsables de la rama y de su evolución.
-- **Mantener el repositorio limpio y organizado:** ramas sin issue asociado tienden a quedar abandonadas y entorpecen la gestión del repositorio.
+## 🔹 1. Condiciones Previas
 
-# 🔹 2. Creación de ramas de trabajo: Métodos recomendados
+La creación de una rama debe realizarse únicamente cuando exista una **tarea o issue asignado**. No se deben crear ramas de manera anticipada o sin propósito definido.
 
-En un flujo de trabajo basado en ramas (`develop`, `feat/*`, `hotfix/*`, etc.), la creación de ramas correctas es un paso crítico para mantener la estabilidad del código y evitar conflictos innecesarios. Cada nueva rama representa un espacio aislado donde un desarrollador puede trabajar en una tarea, corrección o funcionalidad sin afectar directamente la rama principal o la de desarrollo.
+| Beneficio | Descripción |
+|-----------|-------------|
+| **Trazabilidad** | Cada cambio se rastrea hasta el requerimiento que lo originó |
+| **Gestión clara** | En revisiones y auditorías es fácil identificar qué problema se atiende |
+| **Sin duplicidad** | Evita que dos desarrolladores trabajen en lo mismo sin coordinación |
+| **Responsabilidad** | Siempre se sabe quién es responsable de la rama |
+| **Repositorio limpio** | Evita ramas abandonadas que entorpecen la gestión |
 
-Una rama mal creada, desde `main` en lugar de `develop`, o desde un rama desactualizado puede introducir inconsistencias, dificultar la integración posterior y generar conflictos de merge que pueden ser costosos de resolver. Por ello, es fundamental estandarizar la forma en que se crean las ramas dentro del equipo.
+## 🔹 2. Nomenclatura de Ramas
 
-A continuación, se documentan dos enfoques válidos para crear ramas de trabajo:
+El nombre de las ramas debe ser una **descripción corta y clara** de lo que se está trabajando. No se usan prefijos ya que las ramas son temporales y el tipo de cambio se define en el commit final.
 
-- El método clásico, que refuerza la disciplina de mantener el repositorio local actualizado.
-- Un método más seguro, que garantiza partir siempre de lo último disponible en el repositorio remoto, incluso si el entorno local no está sincronizado.
+```txt
+<descripción-corta>
+```
 
-> [!NOTE]
-> Ambos enfoques son correctos y pueden convivir, pero es importante que el equipo elija cuál será la práctica recomendada para asegurar consistencia y reducir errores.
+### 2.1. Reglas de Formato
 
-# 🔹 Enfoque 1: Método clásico
+| Regla | Descripción | Ejemplo |
+|-------|-------------|---------|
+| **Minúsculas** | Todo en minúsculas | `crear-clientes` ✅ `Crear-Clientes` ❌ |
+| **Kebab-case** | Palabras separadas por guiones | `exportar-reportes` ✅ |
+| **Sin espacios** | Usar guiones en lugar de espacios | `login-google` ✅ |
+| **Corto y descriptivo** | Máximo 3-4 palabras | `filtros-busqueda` ✅ |
+| **Sin caracteres especiales** | Solo letras, números y guiones | `migracion-v2` ✅ |
+| **Que tenga sentido** | Cualquiera debe entender qué se trabaja | `calculo-iva` ✅ `fix-bug` ❌ |
 
-- **Paso 1:** Posicionarse en la rama `develop`.
-    
-    ```bash
-    git checkout develop
-    ```
+## 🔹 3. Métodos de Creación
 
-    👉 **Propósito:** Asegurarse de estar en la rama base desde donde deben partir todas las ramas de desarrollo.<br>
-    ⚠️ **Problema que evita:** Crear la rama accidentalmente desde main u otra rama equivocada o desactualizada.
-
-- **Paso 2:** Actualizar la rama `develop` de tu repositoroio local.
-
-    ```bash
-    git pull origin develop
-    ```
-
-    👉 **Propósito:** Traer los últimos cambios de la rama remota.<br>
-    ⚠️ **Problema que evita:** Empezar la nueva rama con una base desactualizada, lo que generaría conflictos al hacer merge después.
-
-- **Paso 3:** Crear la nueva rama.
-
-    ```bash
-    git checkout -b <nombre de la rama nueva>
-    ```
-
-    👉 **Propósito:** Crear una nueva rama local, basada en la rama actual (`develop`).<br>
-    ⚠️ **Problema que evita:** Tener ramas que no siguen la convención de nombres o que parten de la rama incorrecta.
+Una rama mal creada (desde `main` en lugar de `development`, o desde una rama desactualizada) puede introducir inconsistencias y generar conflictos costosos de resolver.
 
 > [!NOTE]
-> El nombre de las ramas deben seguir el estandar [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+> Ambos métodos son válidos. El equipo debe elegir cuál según las circunstancias.
 
-- **Paso 4:** Publicar la rama en remoto.
+### 3.1. Método Clásico
 
-    ```bash
-    git push -u origin <nombre de la rama nueva>
-    ```
+Requiere mantener la rama local `development` siempre actualizado.
 
-    👉 **Propósito:** Subir la rama al repositorio remoto y establecer el “tracking” con la rama remota correspondiente.<br>
-    ⚠️ **Problema que evita:** Ramas que solo existen en local, invisibles para el resto del equipo.
+**Paso 1:** Posicionarse en la rama `development`
+```bash
+git checkout development
+```
 
-✅ **Ventajas de este método:**
+**Paso 2:** Actualizar desde el repositorio remoto
+```bash
+git pull origin development
+```
 
-- Refuerza la práctica de mantener develop local siempre actualizado.
-- Es intuitivo y fácil de recordar.
+**Paso 3:** Crear la nueva rama
+```bash
+git checkout -b crear-clientes
+```
 
-⚠️ **Riesgo principal:**
+**Paso 4:** Publicar en el repositorio remoto
+```bash
+git push -u origin crear-clientes
+```
 
-- Si el desarrollador olvida hacer git pull antes de crear la rama, puede partir de un develop local desactualizado.
+**Ventajas:**
+- Refuerza la práctica de mantener la rama local `development` actualizada.
 
-# 🔹 Enfoque 2: Método seguro
+**Riesgo:**
+- Si olvidas hacer `git pull`, partirás de una rama desactualizada.
 
-- **Paso 1:** Actualizar referencias remotas.
+### 3.2. Método Seguro
 
-    ```bash
-    git fetch --all
-    ```
+Garantiza partir siempre de lo último en remoto, sin importar el estado local.
 
-    👉 **Propósito:** Sincronizar todas las referencias remotas en tu repositorio local.<br>
-    ⚠️ **Problema que evita:** Crear una rama desde una referencia de develop obsoleta que no incluya los últimos cambios del equipo.
+**Paso 1:** Actualizar referencias remotas
+```bash
+git fetch --all
+```
 
-- **Paso 2:** Sin importar en qué rama estés, crear la nueva rama desde `origin/develop`.
+**Paso 2:** Crear rama desde la rama remota `origin/development`
+```bash
+git checkout -b crear-clientes origin/development
+```
 
-    ```bash
-    git checkout -b <nombre de la rama nueva> origin/develop
-    ```
+**Paso 3:** Publicar en el repositorio remoto
+```bash
+git push -u origin crear-clientes
+```
 
-    👉 **Propósito:** Esto garantiza que la nueva rama contiene exactamente lo último que hay en develop remoto, aunque tu develop local esté desactualizado.<br>
-    ⚠️ **Problema que evita:** Reduce los riesgos de arrastrar commits faltantes.
+**Ventajas:**
+- Más seguro, nunca dependes de tener la rama local `development` actualizada.
+- Puede ejecutarse desde cualquier rama.
 
-> [!NOTE]
-> El nombre de las ramas deben seguir el estandar [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+**Desventaja:**
+- Requiere ejecutar `git fetch --all` periódicamente para mantener referencias sincronizadas.
 
-- **Paso 3:** Publicar la rama en remoto.
+## 🔹 4. Resumen de Comandos
 
-    ```bash
-    git push -u origin <nombre de la rama nueva>
-    ```
-
-    👉 **Propósito:** Puede ejecutarse desde cualquier rama en la que estés.<br>
-    ⚠️ **Problema que evita:** Reduce los riesgos de arrastrar commits faltantes.
-
-✅ **Ventajas de este método:**
-
-- Más seguro, unca dependes de tener develop local actualizado.
-- Puede ejecutarse desde cualquier rama en la que estés.
-
-⚠️ **Riesgo principal:**
-
-- Mas que un riesgo, es una desventaja, ya que te obliga ejecutar periódicamente `git fetch --all` para mantener sincronizadas todas las referencias remotas en tu repositorio local.
+| Acción | Comando |
+|--------|---------|
+| Cambiar a development | `git checkout development` |
+| Actualizar development | `git pull origin development` |
+| Actualizar referencias | `git fetch --all` |
+| Crear rama (local) | `git checkout -b <nombre>` |
+| Crear rama (desde remoto) | `git checkout -b <nombre> origin/development` |
+| Publicar rama | `git push -u origin <nombre>` |
