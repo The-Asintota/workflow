@@ -85,22 +85,12 @@ Al usar **frases nominales** (sustantivos y descripciones), las release notes se
 | **Máximo 72 caracteres** | Mantén la descripción concisa. |
 | **Sin punto final** | No termines con punto. |
 
-## 🔹 4. Flujo de Trabajo con Squash Merge
+## 🔹 4. Prefijos Reservados
 
-Este proyecto utiliza **squash merge** para integrar Pull Requests. Esto significa que todos los commits de una rama se combinan en un único commit al fusionar.
+Este proyecto utiliza **squash merge** para integrar Pull Requests hacia `development`. Esto significa que todos los commits de una rama se combinan en un único commit al fusionar.
 
 > [!IMPORTANT]
 > Los prefijos `feat`, `fix` y `perf` están **reservados** para el commit final del squash merge, ya que impactan directamente el versionado semántico.
-
-### 4.1. Categorías de Prefijos
-
-| Categoría | Prefijos | Uso |
-|-----------|----------|-----|
-| **Squash Merge** | `feat`, `fix`, `perf` | Solo para el commit final al fusionar PR |
-| **Desarrollo** | `add`, `wip` | Commits intermedios durante el desarrollo |
-| **General** | `docs`, `style`, `refactor`, `test`, `chore`, `ci`, `build`, `revert` | Cualquier momento |
-
-### 4.2. Flujo de Ejemplo
 
 Imagina que estás creando un nuevo endpoint `POST /products`:
 
@@ -124,7 +114,7 @@ Los tipos clasifican los cambios de manera uniforme y permiten que cualquier per
 ### 5.1. `feat` - Nueva Funcionalidad ⚡
 
 > [!NOTE]
-> Este prefijo está **reservado para squash merge**. Usa `add` para commits intermedios.
+> Este prefijo está **reservado para squash merge**.
 
 **Qué es:** Funcionalidad completa visible para el usuario/cliente, lista para producción.
 
@@ -156,7 +146,7 @@ feat(offline): Modo sin conexión con sincronización automática
 ### 5.2. `fix` - Corrección de Bug ⚡
 
 > [!NOTE]
-> Este prefijo está **reservado para squash merge**. Usa `add` para commits intermedios.
+> Este prefijo está **reservado para squash merge**.
 
 **Qué es:** Corrección completa de un bug, incluyendo todos los cambios necesarios.
 
@@ -188,7 +178,7 @@ fix(permisos): Acceso denegado a usuarios con rol administrador
 ### 5.3. `perf` - Mejora de Rendimiento ⚡
 
 > [!NOTE]
-> Este prefijo está **reservado para squash merge**. Usa `add` para commits intermedios.
+> Este prefijo está **reservado para squash merge**.
 
 **Qué es:** Optimización completa con impacto medible en rendimiento.
 
@@ -272,7 +262,6 @@ wip: Checkpoint antes de refactor mayor
 wip(reportes): Gráficos a medio terminar
 wip: Guardando cambios antes de cambiar de rama
 ```
-
 
 ### 5.6. `docs` - Documentación
 
@@ -538,8 +527,6 @@ Añade `BREAKING CHANGE` si y solo si el cambio exige alguna de estas tres cosas
 1. **Footer del commit:** Siempre agrega la sección `BREAKING CHANGE: <explicación>`.
 2. **Marca el asunto con `!`:** (opcional pero recomendable) `feat(api)!: Cambio en estructura de respuesta`. Herramientas automáticas lo detectan mejor.
 3. **Incluye en el body:** Una explicación corta del cambio y en el footer las instrucciones de migración detalladas.
-
-### Ejemplo Completo
 
 ```txt
 feat(api)!: Cambio en estructura de respuesta del endpoint /usuarios
