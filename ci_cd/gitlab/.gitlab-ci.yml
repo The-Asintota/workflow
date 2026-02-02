@@ -54,7 +54,7 @@ publish_release:
     # Install semantic-release and the necessary plugins without saving them to a package.json.
     # These plugins allow you to analyze commits, generate release notes, update the changelog,
     # create Git tags, and publish the release to GitLab.
-    - npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/gitlab @semantic-release/gitlab conventional-changelog-conventionalcommits
+    - npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/gitlab conventional-changelog-conventionalcommits
   script:
     # The following commented line is used to test the process without creating an actual release.
     # - npx semantic-release --dry-run
