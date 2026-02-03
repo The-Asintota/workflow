@@ -23,27 +23,46 @@ Este proyecto proporciona un flujo de trabajo completo para implementar mejores 
 - ✅ **Despliegues automatizados y confiables**.
 - ✅ **Flujo de trabajo escalable para equipos de cualquier tamaño**.
 
-## 🔹 2. Flujo de Trabajo
+## 🔹 2. Orden de Lectura Recomendado
 
-Sigue estas guías para implementar el workflow completo y funcional en tu proyecto:
+Para comprender e implementar correctamente este flujo de trabajo, es importante seguir las guías en el orden indicado. Cada paso construye sobre el anterior: primero entenderás la estrategia de ramas que define cómo organizar el trabajo, luego aprenderás las convenciones para nombrar ramas y escribir commits, y finalmente configurarás la automatización que aprovecha todo lo anterior.
 
-### 2.1. Creación de Ramas de Trabajo
-**Cuándo:** Al iniciar el desarrollo de una nueva funcionalidad o corrección.
+```mermaid
+flowchart TD
+    A[1. Estrategia de Ramas] --> B[2. Creación de Ramas]
+    B --> C[3. Creación de Commits]
+    C --> D[4. CI/CD]
+```
 
-Aprende a crear ramas de trabajo siguiendo las mejores prácticas y evitando errores comunes como partir de ramas desactualizadas.
+### Paso 1: Estrategia de Ramas
 
-📖 **[Guía detallada →](stages/create_work_branch.md)**
+Comprende la estructura de ramas del proyecto y las estrategias de merge. Este es el fundamento de todo el flujo de trabajo.
 
-### 2.2. Creación de Commits
-**Cuándo:** Al guardar cambios en tu rama de trabajo.
+📖 **[Estrategia de Ramas →](guides/branching_strategy.md)**
+
+---
+
+### Paso 2: Creación de Ramas de Trabajo
+
+Aprende a crear ramas de trabajo siguiendo las convenciones establecidas.
+
+📖 **[Creación de Ramas →](guides/create_branch.md)**
+
+---
+
+### Paso 3: Creación de Commits
 
 Implementa convenciones de `commits` que permitan automatizar el versionado y la generación de `changelogs`.
 
-📖 **[Guía detallada →](stages/create_commit.md)**
+📖 **[Creación de Commits →](guides/create_commit.md)**
 
-### 2.3. Configuración de CI/CD
-**Cuándo:** Al configurar el repositorio para automatización.
+---
+
+### Paso 4: Configuración de CI/CD
 
 Implementa pipelines de CI/CD que automaticen pruebas, despliegues y publicación de `releases`.
 
-📖 **[Guía detallada →](ci/gitlab/README.md)**
+| Plataforma | Documentación |
+|------------|---------------|
+| **GitHub Actions** | 📖 **[Configuración para GitHub →](ci_cd/github/README.md)** |
+| **GitLab CI/CD** | 📖 **[Configuración para GitLab →](ci_cd/gitlab/README.md)** |
