@@ -50,6 +50,14 @@ Define los flujos de CI/CD con tres etapas **test**, **deploy** y **release**, c
 
 - Crea una variable de entorno protegida en CI llamada **GITLAB_TOKEN** o **CI_JOB_TOKEN** con las siguientes opciones habilitadas **Masked**, **Protect variable** y **Expand variable reference**, esta variable tendra como valor un token de acceso con los permisos **api**, **read_repository**, **write_repository**. `@semantic-release/gitlab` necesita credenciales para publicar la release y `@semantic-release/git` para empujar cambios. Para crear y configurar el token de accesso puede consultar la siguiente documentación [aquí](https://docs.gitlab.com/user/project/settings/project_access_tokens/) y para crear y configurar la variable de entorno puede consultar la siguiente documentación [aquí](https://docs.gitlab.com/ci/variables/).
 - Cualquier rama que tenga como objetivo realizar una MR hacia la rama main o development debe ser una rama protegida. En algunos casos no conviene proteger la rama para trabajar mejor con ella. Considere proteger la rama en el momento en que se vaya a revisar o aceptar la MR y mantenerla desprotegido mientras se trabaja en ella.
+- Antes de que semantic-release tome el control, debes crear el primer tag de versión manualmente:
+  ```bash
+  git tag v0.1.0
+  git push origin v0.1.0
+  ```
+
+> [!IMPORTANT]
+> Cuando inicies un proyecto nuevo y agregues los archivos iniciales, crea el tag v0.1.0 para establecer el punto de partida. A partir de ahí, semantic-release se encargará de incrementar las versiones automáticamente.
 
 ## 🔹 3. Modificaciones Requeridas
 

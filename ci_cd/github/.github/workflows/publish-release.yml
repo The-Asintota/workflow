@@ -1,0 +1,38 @@
+name: Publish release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish_release:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Cargar todo el historial de git del repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Instalar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Verificar que exista al menos un tag
+        run: |
+          if ! git tag | grep -q .; then
+            echo "No existen tags en el repositorio."
+            echo "Se requiere crear manualmente el tag inicial antes de usar este flujo."
+            exit 1
+          fi
+      - name: Instalar dependencias del flujo
+        run: |
+          npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github conventional-changelog-conventionalcommits
+      - name: Verificar configuración de semantic-release
+        run: npx semantic-release --dry-run
+      - name: Ejecutar semantic-release
+        run: npx semantic-release
